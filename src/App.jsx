@@ -4,37 +4,40 @@ import "./App.css"
 
 function App() {
   const [usersData, setUsersData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true)
     getUsersData()
   }, [])
 
-  async function getUsersData(){
-    const url = "https://dummyjson.com/users"
-    const response = await fetch(url)
-    const data = await response.json()
-    
-    setUsersData(data.users)
-  }
 
-  console.log(usersData);
+  const getUsersData = async () => {
+    const url = "http://localhost:3000/users"
+    let response = await fetch(url)
+    response = await response.json()
+    console.log(response);
+    setUsersData(response);
+    setLoading(false);
+  }
+  
 
   return (
     <>
       <div>API Calling Example</div>
       <ul className="user-list-header">
-            <li>Firstname</li>
-            <li>Lastname</li>
-            <li>Email</li>
-          </ul>
+        <li>Id</li>
+        <li>Name</li>
+        <li>Email</li>
+      </ul>
       {
-         usersData && usersData.map((user) => (
+        !loading ? usersData && usersData.map((user) => (
           <ul key={user.id} className="user-list">
-            <li>{user.firstName}</li>
-            <li>{user.lastName}</li>
+            <li>{user.id}</li>
+            <li>{user.name}</li>
             <li>{user.email}</li>
           </ul>
-        ))
+        )) : <div>Loading...</div>
       }
     </>
   )
