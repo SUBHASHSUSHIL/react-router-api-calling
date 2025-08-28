@@ -25,12 +25,14 @@ function App() {
       <ul className="user-list-header">
             <li>Firstname</li>
             <li>Lastname</li>
+            <li>Email</li>
           </ul>
       {
          usersData && usersData.map((user) => (
           <ul key={user.id} className="user-list">
             <li>{user.firstName}</li>
             <li>{user.lastName}</li>
+            <li>{user.email}</li>
           </ul>
         ))
       }
