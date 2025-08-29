@@ -4,14 +4,17 @@
   border: 1px solid #aaa;
   margin: 0;
   padding: 10px;
+  list-style: none;
 }
 
 .user-list-header {
-  display: flex;
-  justify-content: space-around;
   font-size: 20px;
-  font-weight: bold;
-  border-bottom: 2px solid #aaa;
-  margin: 0;
-  padding: 10px;
+  font-weight: 800;
+}
+
+.nav-list{
+  display: flex;
+  width: 400px;
+  justify-content: space-around;
+  list-style: none;
 }

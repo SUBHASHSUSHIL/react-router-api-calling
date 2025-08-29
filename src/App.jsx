@@ -1,47 +1,29 @@
-import { useEffect, useState } from "react"
+import { NavLink, Route, Routes } from "react-router";
 import "./App.css"
-
+import UserList from "./UserList";
+import UserAdd from "./UserAdd";
 
 function App() {
-  const [usersData, setUsersData] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true)
-    getUsersData()
-  }, [])
-
-
-  const getUsersData = async () => {
-    const url = "http://localhost:3000/users"
-    let response = await fetch(url)
-    response = await response.json()
-    console.log(response);
-    setUsersData(response);
-    setLoading(false);
-  }
-  
 
   return (
-    <>
-      <div>API Calling Example</div>
-      <ul className="user-list-header">
-        <li>Id</li>
-        <li>Name</li>
-        <li>Email</li>
+    <div>
+      <ul className="nav-list">
+        <li>
+          <NavLink to="/">User List</NavLink>         
+        </li>
+        <li>
+           <NavLink to="/add-user">Add User</NavLink>
+        </li>
       </ul>
-      {
-        !loading ? usersData && usersData.map((user) => (
-          <ul key={user.id} className="user-list">
-            <li>{user.id}</li>
-            <li>{user.name}</li>
-            <li>{user.email}</li>
-          </ul>
-        )) : <div>Loading...</div>
-      }
-    </>
+      {/* <h1>Make Routes and Pages for Add User and User List UI</h1> */}
+      {/* <UserList /> */}
+      <Routes>
+        <Route path="/" element={<UserList />} />
+        <Route path="/add-user" element={<UserAdd />} />
+      </Routes>
+    </div>
   )
 }
 
-export default App
+export default App;
 
